@@ -27,38 +27,43 @@ class _SplashView extends State<SplashView> {
 
     if (isAuthenticated) {
       // Usuario autenticado, navegar a la pantalla principal
-      Navigator.pushReplacementNamed(context, '/home');
+      //Navigator.pushReplacementNamed(context, '/home');
     } else {
       // Usuario no autenticado, navegar a la pantalla de inicio de sesión
-      Navigator.pushReplacementNamed(context, '/login');
+//Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.deepPurple.shade700,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/d20.png',
-              width: 150,
-              height: 150,
+            Opacity(
+              opacity:  0.7,
+              child: Image.asset(
+                'assets/images/d20.png',
+                width: 150,
+                height: 150,
+              ),
             ),
-            SizedBox(height: 70),
+            SizedBox(height: 90),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 80),
+              margin: EdgeInsets.symmetric(horizontal: 290),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(80),
               ),
-              child: ClipRRect(
+              child:
+              ClipRRect(
                 borderRadius: BorderRadius.circular(80),
                 child: LinearProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  backgroundColor: Colors.grey[400],
-                  minHeight: 20,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey.shade200
+                  ),
+                  backgroundColor: Colors.deepPurple.shade700,
+                  minHeight: 4,
                 ),
               ),
             ),
