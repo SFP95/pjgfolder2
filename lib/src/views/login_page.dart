@@ -22,12 +22,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Color.fromARGB(255, 69, 55, 80),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Color.fromARGB(255, 69, 55, 80),
         iconTheme: IconThemeData(
-          color: Colors.grey[400],
+          color: Color.fromARGB(255, 163, 147, 191),
           size: 30,
         ),
         leading: IconButton(
@@ -42,26 +42,27 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Colors.grey[400],
-                  borderRadius:BorderRadius.circular(30)
+                  color: Color.fromARGB(255, 163, 147, 191),
+                  borderRadius:BorderRadius.circular(20)
               ),
               child: Column(
                 children: [
                   TextFormField(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[800],
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _emailController,
-                    decoration: InputDecoration(labelText: 'Email'),
+                    decoration: InputDecoration(
+                        labelText: 'Email'),
                   ),
                   TextFormField(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[800],
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _passwordController,
                     decoration: InputDecoration(labelText: 'Password'),
@@ -71,11 +72,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   style:  ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.grey.shade400),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 163, 147, 191)),
                    ),
                   onPressed: () async {
                     print("LOGIN LLAMADO");
@@ -98,16 +99,22 @@ class _LoginPageState extends State<LoginPage> {
                     }
 
                   },
-                  child: Text('Log in', style: TextStyle(color: Colors.grey[800],fontSize: 20)),
+                  child: Text('Log in',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 12, 9, 16),
+                        fontSize: 30)),
                 ),
                 ElevatedButton(
                   style:  ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.grey.shade400),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 163, 147, 191)),
                   ),
                   onPressed: () {
                     Navigator.popAndPushNamed(context, '/register');
                   },
-                  child: Text('Register', style: TextStyle(color: Colors.grey[800],fontSize: 20)),
+                  child: Text('Register',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 12, 9, 16),
+                          fontSize: 30)),
                 ),
               ],
             ),

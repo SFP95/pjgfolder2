@@ -37,13 +37,13 @@ class _SplashView extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade700,
+      backgroundColor: Color.fromARGB(255, 12, 9, 16),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Opacity(
-              opacity:  0.7,
+              opacity:  0.6,
               child: Image.asset(
                 'assets/images/d20.png',
                 width: 150,
@@ -60,9 +60,9 @@ class _SplashView extends State<SplashView> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(80),
                 child: LinearProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey.shade200
-                  ),
-                  backgroundColor: Colors.deepPurple.shade700,
+                  valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(
+                      234, 171, 155, 198)),
+                  backgroundColor: Color.fromARGB(255, 69, 55, 80),
                   minHeight: 4,
                 ),
               ),
