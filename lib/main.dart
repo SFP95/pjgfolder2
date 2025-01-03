@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
       title: 'RGS - Role Game System',
-      initialRoute: '/splash',
+      initialRoute: '/register',
       routes: {
         '/':(context)=> HomePage(),
         '/splash':(context)=> SplashView(),

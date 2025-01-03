@@ -69,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Color.fromARGB(255, 69, 55, 80),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,31 +78,31 @@ class _RegisterPageState extends State<RegisterPage> {
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: Colors.grey[400],
+                color: Color.fromARGB(255, 163, 147, 191),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Column(
                 children: [
                   TextFormField(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[800],
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _aliasController,
                     decoration: InputDecoration(labelText: 'User Name'),
                   ),
                   TextFormField(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[800],
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _emailController,
                     decoration: InputDecoration(labelText: 'Email'),
                   ),
                   TextFormField(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[800],
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _passwordController,
                     decoration: InputDecoration(labelText: 'Password'),
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.grey.shade400),
+                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 171, 155, 198)),
                   ),
                   onPressed: () async {
                     // Obtener los valores de los controladores
@@ -143,18 +143,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                   },
                   child: Text('Sign up',
-                      style: TextStyle(color: Colors.grey[800], fontSize: 20)),
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 12, 9, 16),
+                          fontSize: 30)),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.grey.shade400),
+                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 171, 155, 198)),
                   ),
                   onPressed: () {
                     Navigator.popAndPushNamed(context, '/');
                   },
                   child: Text('Cancel',
-                      style: TextStyle(color: Colors.grey[800], fontSize: 20)),
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 12, 9, 16),
+                          fontSize: 30)),
                 ),
               ],
             ),
