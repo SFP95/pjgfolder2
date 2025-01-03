@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 163, 147, 191),
