@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pjgfolder2/src/views/login_page.dart';
+
+import 'character_list_page.dart';
+import 'dice_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,8 +10,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void logout() {
-    Navigator.pushNamed(context, '/login');
+  int selectedIndex = 0;
+
+  // Método para cambiar el índice y mostrar el contenido correspondiente
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 
   @override
@@ -18,161 +27,88 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent, // AppBar transparente
-        //title: Text("Rol App", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFB39DDB), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+      body: Row(
+        children: [
+          Material(
+            elevation: 10, // Sombra al NavigationRail
+            child: NavigationRail(
+              backgroundColor: Color(0xFFB39DDB),
+              selectedIndex: selectedIndex,
+              onDestinationSelected: onItemTapped,
+              labelType: NavigationRailLabelType.all,
+              destinations: [
+                NavigationRailDestination(
+                  icon: Icon(Icons.casino_rounded),
+                  selectedIcon: Icon(Icons.casino_rounded, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Dice Rolls'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.auto_awesome),
+                  selectedIcon: Icon(Icons.auto_awesome, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Spells'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.bolt),
+                  selectedIcon: Icon(Icons.bolt, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Combat'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.pets),
+                  selectedIcon: Icon(Icons.pets, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Bestiary'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.history_edu),
+                  selectedIcon: Icon(Icons.history_edu, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Campaign'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.account_circle_outlined),
+                  selectedIcon: Icon(Icons.account_circle_outlined, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text('Characters'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.login),
+                  selectedIcon: Icon(Icons.login, color: Color.fromARGB(255, 69, 55, 80)),
+                  label: Text(' Login | out'),
+                ),
+              ],
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(28, 150, 28, 28),
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 50,
-                crossAxisSpacing: 50,
-                crossAxisCount: 2,
-                padding: EdgeInsets.all(40),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFFB39DDB), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                ),
+              ),
+              child: IndexedStack(
+                index: selectedIndex,  // Usamos el índice para determinar qué widget mostrar
                 children: [
-                  Tooltip(
-                    message: "DADOS",
-                    child: Column(
-                      children: [
-                    Padding(padding: const EdgeInsets.only(top: 80.0),
-                child:
-                        IconButton(
-                          iconSize: 20,
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/dice');
-                          },
-                          icon: Image.asset(
-                            'assets/images/dado.png',
-                            width: 390,  // Ajusta el ancho de la imagen
-                            height: 370, // Ajusta la altura de la imagen
-                            color: Color.fromARGB(231, 12, 9, 16),
-                          ),
-                        ),
-                    ),
-                        Text(
-                          "Dice",
-                          style: TextStyle(
-                            fontSize: 45,
-                            color: Color.fromARGB(255, 12, 9, 16),
-                            shadows: [
-                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  // Aquí puedes agregar los diferentes widgets para cada sección
+                  DicePage(),
+                  Center(
+                    child: Text('Spells', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
-                  Tooltip(
-                    message: "Lista de Personajes",
-                    child: Column(
-                      children: [
-                    Padding(padding: const EdgeInsets.only(top: 80.0),
-                    child:
-                        IconButton(
-                          iconSize: 60,
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/characters_list');
-                          },
-                          icon: Image.asset(
-                            'assets/images/nota.png',
-                            width: 390,  // Ajusta el ancho de la imagen
-                            height: 370, // Ajusta la altura de la imagen
-                            color: Color.fromARGB(231, 12, 9, 16),
-                          ),
-                        ),
-                    ),
-                        Text(
-                          "Characters",
-                          style: TextStyle(
-                            fontSize: 45,
-                            color: Color.fromARGB(255, 12, 9, 16),
-                            shadows: [
-                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  Center(
+                    child: Text('Combat', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
-
-                  Tooltip(
-                    message: 'Log Out',
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 80.0), // Margen de 20 unidades arriba
-                          child:  IconButton(
-                            iconSize: 400, // Aumenta el tamaño del icono aquí
-                            onPressed: () {
-                              logout();
-                            },
-                            icon: Icon(
-                              Icons.logout,
-                              size: 350,  // Ajusta el tamaño aquí también
-                              color: Color.fromARGB(231, 12, 9, 16),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Log out',
-                          style: TextStyle(
-                            fontSize: 45,
-                            color: Color.fromARGB(255, 12, 9, 16),
-                            shadows: [
-                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  Center(
+                    child: Text('Bestiary', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
-                  Tooltip(
-                    message: "Log / Sing In",
-                    child: Column(
-                      children: [
-                        Padding(padding: const EdgeInsets.only(top: 80.0),
-                          child:
-                          IconButton(
-                            iconSize: 90,
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/login');
-                            },
-                            icon: Image.asset(
-                              'assets/images/perfil.png',
-                              width: 390,  // Ajusta el ancho de la imagen
-                              height: 370, // Ajusta la altura de la imagen
-                              color: Color.fromARGB(231, 12, 9, 16),
-                            ),
-                          ),),
-
-                        Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontSize: 45,
-                            color: Color.fromARGB(255, 12, 9, 16),
-                            shadows: [
-                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  Center(
+                    child: Text('Campaign', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
+                  CharacterListPage(),
+                  LoginPage(),
                 ],
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

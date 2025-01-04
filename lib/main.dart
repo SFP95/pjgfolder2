@@ -12,6 +12,7 @@ import 'package:pjgfolder2/src/views/newPhoto.dart';
 import 'package:pjgfolder2/src/views/profile_user_log.dart';
 import 'package:pjgfolder2/src/views/register_page.dart';
 import 'package:pjgfolder2/src/views/splash_view.dart';
+import 'package:pjgfolder2/src/views/_LoadingLogoState.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/character_edit': (context) => CharacterEditPage(),
         '/character_creation': (context) => CharacterCreationPage(),
         '/profile_UserLog': (context) => ProfileUserLog(),
+        //'/loading_logo': (context) => _LoadingLogoState(),
       },
     );
   }
