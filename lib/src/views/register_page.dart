@@ -69,17 +69,24 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 69, 55, 80),
+      backgroundColor: Color.fromARGB(255, 41, 33, 47),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Icon(
+                Icons.account_circle,
+                size: 200,
+                color:Color.fromARGB(255, 163, 147, 191)
+            ),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(100, 30, 100, 30),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 163, 147, 191),
                 borderRadius: BorderRadius.circular(30),
+                  gradient: LinearGradient(
+                      colors: [Color.fromARGB(255, 163, 147, 191), Color.fromARGB(
+                          255, 82, 68, 103)])
               ),
               child: Column(
                 children: [
@@ -89,23 +96,62 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _aliasController,
-                    decoration: InputDecoration(labelText: 'User Name'),
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 12, 9, 16),
+                            )
+                        ),
+                        labelText: 'User Name',
+                        labelStyle: TextStyle(
+                          fontSize: 25,
+                          color: Color.fromARGB(255, 69, 55, 80),
+                        )
+                    ),
                   ),
+                  SizedBox(height: 15), // Espacio vertical de 20 píxeles
                   TextFormField(
                     style: TextStyle(
                       fontSize: 30,
                       color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _emailController,
-                    decoration: InputDecoration(labelText: 'Email'),
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 12, 9, 16),
+                            )
+                        ),
+                        labelText: 'Email',
+                        labelStyle: TextStyle(
+                          fontSize: 25,
+                          color: Color.fromARGB(255, 69, 55, 80),
+                        )
+                    ),
+
                   ),
+                  SizedBox(height: 15), // Espacio vertical de 20 píxeles
                   TextFormField(
                     style: TextStyle(
                       fontSize: 30,
                       color: Color.fromARGB(255, 12, 9, 16),
                     ),
                     controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 12, 9, 16),
+                            )
+                        ),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                          fontSize: 25,
+                          color: Color.fromARGB(255, 69, 55, 80),
+                        )
+                    ),
                     obscureText: true,
                   ),
                 ],
@@ -114,52 +160,43 @@ class _RegisterPageState extends State<RegisterPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 171, 155, 198)),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(Color.fromARGB(255, 171, 155, 198)),
+                    ),
+                    onPressed: () async {
+                      // Obtener los valores de los controladores
+                      String alias = _aliasController.text;
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+
+                      var response = await service.register(alias, email, password);
+                      if (response == null) {
+                        print("RESPONSE ES NULO");
+                      } else {
+                        // Guardar las credenciales del usuario
+                        print("RESPONSE NO NULO, ENTRO");
+                        await UserPreferences.saveUserCredentials(response.user, response.token);
+
+                        Navigator.popAndPushNamed(context, '/'); // Navegar a la página de inicio y eliminar todas las rutas anteriores
+
+                        /*// Prueba de comprobación de recogida de user y token
+                          int? userId = await UserPreferences.getUserId();
+                          String? token = await UserPreferences.getToken();
+                          print('User ID: $userId');
+                          print('Token: $token');*/
+                      }
+                    },
+                    child: Text('Sign up',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 69, 55, 80),
+                            fontSize: 28)),
                   ),
-                  onPressed: () async {
-                    // Obtener los valores de los controladores
-                    String alias = _aliasController.text;
-                    String email = _emailController.text;
-                    String password = _passwordController.text;
-
-                    var response = await service.register(alias, email, password);
-                    if (response == null) {
-                      print("RESPONSE ES NULO");
-                    } else {
-                      // Guardar las credenciales del usuario
-                      print("RESPONSE NO NULO, ENTRO");
-                      await UserPreferences.saveUserCredentials(response.user, response.token);
-
-                      Navigator.popAndPushNamed(context, '/'); // Navegar a la página de inicio y eliminar todas las rutas anteriores
-
-                      /*// Prueba de comprobación de recogida de user y token
-                        int? userId = await UserPreferences.getUserId();
-                        String? token = await UserPreferences.getToken();
-                        print('User ID: $userId');
-                        print('Token: $token');*/
-                    }
-                  },
-                  child: Text('Sign up',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 12, 9, 16),
-                          fontSize: 30)),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Color.fromARGB(255, 171, 155, 198)),
-                  ),
-                  onPressed: () {
-                    Navigator.popAndPushNamed(context, '/');
-                  },
-                  child: Text('Cancel',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 12, 9, 16),
-                          fontSize: 30)),
-                ),
+
               ],
             ),
           ],

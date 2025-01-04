@@ -40,7 +40,7 @@ class _DicePageState extends State<DicePage> {
             children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(150, 1, 150, 1),
+                  margin: EdgeInsets.fromLTRB(250, 1, 250, 1),
                   padding: EdgeInsets.all(40),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -108,7 +108,7 @@ class _DicePageState extends State<DicePage> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.fromLTRB(150, 1, 150, 1),
+                margin: EdgeInsets.fromLTRB(250, 1, 250, 1),
                 padding: EdgeInsets.all(40),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(

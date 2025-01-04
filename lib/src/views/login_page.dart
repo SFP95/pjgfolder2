@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjgfolder2/src/views/register_page.dart';
 import '../services/Auth_Service.dart';
 import '../stores/UserPreferences.dart';
 
@@ -32,23 +33,24 @@ class _LoginPageState extends State<LoginPage> {
         ),
 
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min, // Minimiza el tamaño de la columna
           children: <Widget>[
-
             Icon(
               Icons.account_circle,
               size: 200,
               color:Color.fromARGB(255, 69, 55, 80)
             ),
+            SizedBox(height: 20), // Espacio entre el icono y el siguiente widget
             Container(
-              margin: EdgeInsets.fromLTRB(300, 30, 300, 50),
+              margin: EdgeInsets.fromLTRB(380, 0, 380, 70),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
                  // color: Color.fromARGB(255, 69, 55, 80),
                   borderRadius:BorderRadius.circular(20),
-                  gradient: LinearGradient(colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)])
+                  gradient: LinearGradient(colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(
+                      255, 32, 24, 35)])
               ),
               child: Container(
                 margin: EdgeInsets.fromLTRB(80, 10, 80, 30),
@@ -74,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                       ),
                     ),
+                    SizedBox(height: 15), // Espacio vertical de 20 píxeles
                     TextFormField(
                       style: TextStyle(
                         fontSize: 30,
@@ -137,7 +140,31 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 69, 55, 80)),
                   ),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/register');
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: Color.fromARGB(255, 41, 33, 47),
+                          content: SizedBox(
+                            width: 750, // Permite que el contenido ocupe más espacio
+                            child: RegisterPage(), // Vista de registro que mostrarás en el popup
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Cierra el popup
+                              },
+                              child: Text('Close',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 163, 147, 191),
+                                      fontSize: 28)),
+                            ),
+                          ],
+                        );
+                      }
+                    );
+
+                   // Navigator.popAndPushNamed(context, '/register');
                   },
                   child: Text('Register',
                       style: TextStyle(

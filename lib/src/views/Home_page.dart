@@ -26,13 +26,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent, // AppBar transparente
+          backgroundColor: Color(0xFFB39DDB), // AppBar transparente
       ),
       body: Row(
         children: [
           Material(
             elevation: 0, // Sombra al NavigationRail
             child: NavigationRail(
+              indicatorColor: Color.fromARGB(165, 69, 55, 80),
               backgroundColor: Color(0xFFB39DDB),
               selectedIndex: selectedIndex,
               onDestinationSelected: onItemTapped,
