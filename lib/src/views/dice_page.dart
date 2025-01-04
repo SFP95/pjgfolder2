@@ -53,7 +53,7 @@ class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin
             end: Alignment.bottomRight,
             colors: [
               Color(0xFFB39DDB), // Lavanda claro
-              Color(0xFF2E1A39), // Morado oscuro
+              Color.fromARGB(255, 69, 55, 80), // Morado oscuro
             ],
           ),
         ),

@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
 
-import '../../models/character/Character.dart';
-import '../../utils/http_utils.dart';
+import '../models/character/Character.dart';
+import '../utils/http_utils.dart';
 
 class CharacterListPage extends StatefulWidget {
   @override

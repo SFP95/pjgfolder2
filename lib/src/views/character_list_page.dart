@@ -77,54 +77,66 @@ class _CharacterListPageState extends State<CharacterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFB39DDB),  // Fondo lavanda claro
-      body: characters.isEmpty
-          ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : ListView.builder(
-        padding: EdgeInsets.all(20),
-        itemCount: characters.length, // Ahora muestra todos los personajes
-        itemBuilder: (BuildContext context, int index) {
-          Character character = characters[index];
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFB39DDB), // Lavanda claro
+              Color.fromARGB(255, 69, 55, 80), // Morado oscuro
+            ],
+          ),
+        ),
+        child: characters.isEmpty
+            ? Center(
+          child: CircularProgressIndicator(),
+        )
+            : ListView.builder(
+          padding: EdgeInsets.all(20),
+          itemCount: characters.length, // Ahora muestra todos los personajes
+          itemBuilder: (BuildContext context, int index) {
+            Character character = characters[index];
 
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Color(0xFF2E1A39),  // Morado oscuro
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            child: ListTile(
-              title: Text(
-                character.name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+            return Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color(0xFF2E1A39),  // Morado oscuro
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
               ),
-              subtitle: Text(
-                character.race,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 20,
+              child: ListTile(
+                title: Text(
+                  character.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                subtitle: Text(
+                  character.race,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 20,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/character_sheet');
+                },
               ),
-              onTap: () {
-                Navigator.pushNamed(context, '/character_sheet');
-              },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 69, 55, 80),  // Morado oscuro
