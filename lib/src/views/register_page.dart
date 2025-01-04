@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             Icon(
                 Icons.account_circle,
-                size: 200,
+                size: 150,
                 color:Color.fromARGB(255, 163, 147, 191)
             ),
             Container(

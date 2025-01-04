@@ -23,11 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent, // Fondo transparente para el gradiente
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-          backgroundColor: Color(0xFFB39DDB), // AppBar transparente
-      ),
+      extendBodyBehindAppBar: true, // Esto asegura que el cuerpo se extienda detrás del AppBar
       body: Row(
         children: [
           Material(

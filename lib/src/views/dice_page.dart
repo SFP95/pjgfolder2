@@ -45,6 +45,7 @@ class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -77,7 +78,7 @@ class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 300.0), // Márgenes exteriores a la izquierda y derecha
                   child: Card(
-                    color: Color(0xFFB29EB6), // Fondo claro para contraste
+                    color: Color(0x9BC8BCCC), // Fondo claro para contraste
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     elevation: 8,
                     child: Padding(
@@ -108,7 +109,7 @@ class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin
                 ),
                 // Botón de lanzamiento y resultado
                 Card(
-                  color: Color(0xFFB29EB6), // Fondo claro para contraste
+                  color: Color(0x9BC8BCCC), // Fondo claro para contraste
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   elevation: 8,
                   child: Padding(
@@ -160,7 +161,9 @@ class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin
       children: [
         Text(label, style: TextStyle(fontSize: 30, color: Color(0xFF2E1A39))),
         DropdownButton<int>(
-          dropdownColor: Color(0xFFB29EB6),
+          borderRadius: BorderRadius.circular(30),
+          focusColor: Color(0x9BC8BCCC),
+          dropdownColor: Color(0x9BC8BCCC),
           value: value,
           items: items
               .map((item) => DropdownMenuItem<int>(

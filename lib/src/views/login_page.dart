@@ -37,9 +37,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min, // Minimiza el tamaño de la columna
           children: <Widget>[
+            SizedBox(height: 30), // Espacio entre el icono y el siguiente widget
             Icon(
               Icons.account_circle,
-              size: 200,
+              size: 150,
               color:Color.fromARGB(255, 69, 55, 80)
             ),
             SizedBox(height: 20), // Espacio entre el icono y el siguiente widget
