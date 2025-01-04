@@ -6,139 +6,170 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   void logout() {
-    // Aquí realizarías las operaciones necesarias para cerrar la sesión en la base de datos
-    // Por ejemplo, puedes borrar los datos de sesión o establecer una bandera de "logged_in" en falso
-
-    // Después de cerrar la sesión, puedes navegar a la pantalla de inicio de sesión u otra pantalla
-    Navigator.pushNamed(context, '/login'); // Reemplaza la pantalla actual por la pantalla de inicio de sesión
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.transparent, // Fondo transparente para el gradiente
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.grey.shade800,
+        backgroundColor: Colors.transparent, // AppBar transparente
+        //title: Text("Rol App", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(28, 150, 28, 28),
-            child: GridView.count(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 30.3,
-              crossAxisSpacing: 30.3,
-              crossAxisCount: 2,
-              children: [
-                Tooltip(
-                  message: "DADOS",
-                  child: Column(
-                    children: [
-                      IconButton(
-                        iconSize: 100,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/dice');
-                        },
-                        icon: Image.asset(
-                          'assets/images/dado.png',
-                          color: Colors.grey.shade400,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFB39DDB), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(28, 150, 28, 28),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 50,
+                crossAxisSpacing: 50,
+                crossAxisCount: 2,
+                padding: EdgeInsets.all(40),
+                children: [
+                  Tooltip(
+                    message: "DADOS",
+                    child: Column(
+                      children: [
+                    Padding(padding: const EdgeInsets.only(top: 80.0),
+                child:
+                        IconButton(
+                          iconSize: 20,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/dice');
+                          },
+                          icon: Image.asset(
+                            'assets/images/dado.png',
+                            width: 390,  // Ajusta el ancho de la imagen
+                            height: 370, // Ajusta la altura de la imagen
+                            color: Color.fromARGB(231, 12, 9, 16),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Dice",
-                        style: TextStyle(fontSize: 30, color: Colors.grey.shade400),
-                      ),
-                    ],
-                  ),
-                ),
-                Tooltip(
-                  message: "Lista de Personajes",
-                  child: Column(
-                    children: [
-                      IconButton(
-                        iconSize: 100,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/characters_list');
-                        },
-                        icon: Image.asset(
-                          'assets/images/nota.png',
-                          color: Colors.grey.shade400,
+                    ),
+                        Text(
+                          "Dice",
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Color.fromARGB(255, 12, 9, 16),
+                            shadows: [
+                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Characters",
-                        style: TextStyle(fontSize: 30, color: Colors.grey.shade400),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                /*Tooltip(
-                  message: "Galeria",
-                  child: Column(
-                    children: [
-                      IconButton(
-                        iconSize: 100,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/gallery');
-                        },
-                        icon: Image.asset(
-                          'assets/images/galeria.png',
-                          color: Colors.grey.shade400,
+                  Tooltip(
+                    message: "Lista de Personajes",
+                    child: Column(
+                      children: [
+                    Padding(padding: const EdgeInsets.only(top: 80.0),
+                    child:
+                        IconButton(
+                          iconSize: 60,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/characters_list');
+                          },
+                          icon: Image.asset(
+                            'assets/images/nota.png',
+                            width: 390,  // Ajusta el ancho de la imagen
+                            height: 370, // Ajusta la altura de la imagen
+                            color: Color.fromARGB(231, 12, 9, 16),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Galery",
-                        style: TextStyle(fontSize: 30, color: Colors.grey.shade400),
-                      ),
-                    ],
+                    ),
+                        Text(
+                          "Characters",
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Color.fromARGB(255, 12, 9, 16),
+                            shadows: [
+                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),*/
-                Tooltip(
-                  message: 'Log Out',
-                  child: Column(
-                    children: [
-                      IconButton(
-                        iconSize: 100,
-                        onPressed: () {
-                          logout();
-                        },
-                        icon: Icon(Icons.logout, size: 80,color: Colors.grey.shade400,),
-                      ),
-                      Text(
-                        'Log out',
-                        style: TextStyle(fontSize: 30, color: Colors.grey.shade400),
-                      ),
-                    ],
-                  ),
-                ),
 
-                Tooltip(
-                  message: "Log / Sing In",
-                  child: Column(
-                    children: [
-                      IconButton(
-                        iconSize: 100,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        icon: Image.asset(
-                          'assets/images/perfil.png',
-                          color: Colors.grey.shade400,
+                  Tooltip(
+                    message: 'Log Out',
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 80.0), // Margen de 20 unidades arriba
+                          child:  IconButton(
+                            iconSize: 400, // Aumenta el tamaño del icono aquí
+                            onPressed: () {
+                              logout();
+                            },
+                            icon: Icon(
+                              Icons.logout,
+                              size: 350,  // Ajusta el tamaño aquí también
+                              color: Color.fromARGB(231, 12, 9, 16),
+                            ),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Sing in",
-                        style: TextStyle(fontSize: 30, color: Colors.grey.shade400),
-                      ),
-                    ],
+                        Text(
+                          'Log out',
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Color.fromARGB(255, 12, 9, 16),
+                            shadows: [
+                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Tooltip(
+                    message: "Log / Sing In",
+                    child: Column(
+                      children: [
+                        Padding(padding: const EdgeInsets.only(top: 80.0),
+                          child:
+                          IconButton(
+                            iconSize: 90,
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            icon: Image.asset(
+                              'assets/images/perfil.png',
+                              width: 390,  // Ajusta el ancho de la imagen
+                              height: 370, // Ajusta la altura de la imagen
+                              color: Color.fromARGB(231, 12, 9, 16),
+                            ),
+                          ),),
+
+                        Text(
+                          "Sign In",
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Color.fromARGB(255, 12, 9, 16),
+                            shadows: [
+                              Shadow(offset: Offset(2.0, 2.0), color: Colors.black.withOpacity(0.5), blurRadius: 4)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
