@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pjgfolder2/src/views/character_creation_page.dart';
 import 'dart:convert';
-import 'dart:math';
-
 import '../models/character/Character.dart';
 import '../utils/http_utils.dart';
 
@@ -14,6 +13,13 @@ class CharacterListPage extends StatefulWidget {
 
 class _CharacterListPageState extends State<CharacterListPage> {
   List<Character> characters = [];
+  final _formKey = GlobalKey<FormState>();
+  String _name = '';
+  String _surname = '';
+  int _age = 18;
+  String _race = 'Human';
+  String _story = '';
+  String _statistics = 'Strength: 5, Intelligence: 5, Agility: 5';
 
   @override
   void initState() {
@@ -23,14 +29,10 @@ class _CharacterListPageState extends State<CharacterListPage> {
 
   Future<void> fetchCharacters() async {
     try {
-      // URL del endpoint de la API para obtener la lista de personajes
-      String endpoint = 'characters';
-
-      // Realiza una solicitud GET al servidor para obtener la lista de personajes
+      String endpoint = 'characters'; // URL del endpoint de la API
       http.Response response = await ApiClient().get(endpoint);
 
       if (response.statusCode == 200) {
-        // Decodifica la respuesta JSON y crea instancias de Character
         List<dynamic> data = jsonDecode(response.body);
         List<Character> fetchedCharacters = data.map((item) => Character.fromJson(item)).toList();
 
@@ -45,95 +47,91 @@ class _CharacterListPageState extends State<CharacterListPage> {
     }
   }
 
-  Character generateRandomCharacter() {
-    List<String> randomNames = ['John', 'Jane', 'David', 'Emma', 'Michael', 'Olivia'];
-    List<String> randomSurnames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Miller', 'Wilson'];
-    List<String> randomRaces = ['Human', 'Elf', 'Dwarf', 'Orc', 'Gnome', 'Halfling'];
-
-    Random random = Random();
-    String randomName = randomNames[random.nextInt(randomNames.length)];
-    String randomSurname = randomSurnames[random.nextInt(randomSurnames.length)];
-    int randomAge = random.nextInt(100) + 1;
-    String randomStory = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-    String randomStatistics = 'Strength: ${random.nextInt(10)}, Intelligence: ${random.nextInt(10)}, Agility: ${random.nextInt(10)}';
-    String randomRace = randomRaces[random.nextInt(randomRaces.length)];
-
-    return Character(randomName, randomSurname, randomAge, randomStory, randomStatistics, randomRace);
+  // Método para abrir el diálogo de creación de personaje
+  void _openCharacterCreationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(backgroundColor: Color.fromARGB(255, 69, 55, 80),
+            content: SizedBox(
+            width: 750, // Permite que el contenido ocupe más espacio
+            child: CharacterCreationPage(),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el popup
+              },
+              child: Text('Close',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 163, 147, 191),
+                      fontSize: 28)),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFB39DDB),
+      backgroundColor: Color(0xFFB39DDB),  // Fondo lavanda claro
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color:Color(0xFFB39DDB),
+          color: Color(0xFF2E1A39), // Morado oscuro
           size: 30,
         ),
         backgroundColor: Color(0xFFB39DDB),
+        elevation: 0, // Eliminar sombra del AppBar para integración limpia
+        title: Text(
+          'Character List',
+          style: TextStyle(
+            color: Color(0xFF2E1A39), // Morado oscuro para el título
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(30),
-        itemCount: characters.length + 1, // Agregar 1 para el ejemplo de personaje aleatorio
+      body: characters.isEmpty
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : ListView.builder(
+        padding: EdgeInsets.all(20),
+        itemCount: characters.length, // Ahora muestra todos los personajes
         itemBuilder: (BuildContext context, int index) {
-          if (index == characters.length) {
-            // Índice del ejemplo de personaje aleatorio
-            Character randomCharacter = generateRandomCharacter();
-
-            return Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 69, 55, 80),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: ListTile(
-                title: Text(
-                  randomCharacter.name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFFB39DDB),
-                    fontSize: 30,
-                  ),
-                ),
-                subtitle: Text(
-                  randomCharacter.race,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFFB39DDB),
-                    fontSize: 20,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/character_sheet');
-                },
-              ),
-            );
-          }
-
           Character character = characters[index];
 
           return Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(30),
+            margin: EdgeInsets.symmetric(vertical: 10),
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.grey[400],
-              borderRadius: BorderRadius.circular(30),
+              color: Color(0xFF2E1A39),  // Morado oscuro
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 8,
+                  offset: Offset(0, 4),
+                ),
+              ],
             ),
             child: ListTile(
               title: Text(
                 character.name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 30,
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
                 character.race,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.grey[600],
+                  color: Colors.white70,
                   fontSize: 20,
                 ),
               ),
@@ -145,11 +143,9 @@ class _CharacterListPageState extends State<CharacterListPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey[400]?.withOpacity(0.3),
-        onPressed: () {
-          Navigator.pushNamed(context, '/character_creation');
-        },
-        child: Icon(Icons.add,color: Colors.deepPurple[100],),
+        backgroundColor: Color.fromARGB(255, 69, 55, 80),  // Morado oscuro
+        onPressed: _openCharacterCreationDialog, // Mostrar el diálogo para crear un personaje
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }

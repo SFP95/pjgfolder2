@@ -39,6 +39,10 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
 
   Widget customTextField(String hintText, bool isNumeric, TextEditingController controller) {
     return TextFormField(
+      style: TextStyle(
+        fontSize: 10,
+        color: Color.fromARGB(255, 69, 55, 80)
+      ),
       controller: controller,
       textAlign: TextAlign.center,
       keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
@@ -58,19 +62,19 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
       },
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.deepPurple.shade400),
+        hintStyle: TextStyle(color: Color(0xFFB39DDB)), // Lavanda claro
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
             width: 2,
-            color: Colors.deepPurple.shade200,
+            color: Color(0xFF7E4B8B), // Morado oscuro
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
             width: 2,
-            color: Colors.deepPurple.shade200,
+            color: Color(0xFF7E4B8B), // Morado oscuro
           ),
         ),
       ),
@@ -86,13 +90,13 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
       controller: controller,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.text,
-      textDirection: TextDirection.ltr, // Agrega esta línea
-      maxLines: 1,
+      textDirection: TextDirection.ltr,
+      maxLines: 10,
       scrollPadding: EdgeInsets.symmetric(vertical: 10),
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.deepPurple.shade400),
+        hintStyle: TextStyle(color: Color(0xFFB39DDB)), // Lavanda claro
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
@@ -121,24 +125,24 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
       controller: controller,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.text,
-      maxLines: 1,
+      maxLines: 10,
       scrollPadding: EdgeInsets.symmetric(vertical: 10),
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.deepPurple.shade400),
+        hintStyle: TextStyle(color: Color(0xFFB39DDB)), // Lavanda claro
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
             width: 2,
-            color: Colors.deepPurple.shade200,
+            color: Color(0xFF7E4B8B), // Morado oscuro
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
             width: 2,
-            color: Colors.deepPurple.shade200,
+            color: Color(0xFF7E4B8B), // Morado oscuro
           ),
         ),
       ),
@@ -146,10 +150,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
   }
 
   void saveCharacter() async {
-    // Crear un objeto ApiClient
     final apiClient = ApiClient();
-
-    // Construir el cuerpo de la solicitud con los datos del personaje
     final body = {
       'name': _nameController.text,
       'race': _selectedRace,
@@ -161,15 +162,11 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
       'history': _historiaController.text,
     };
 
-    // Realizar la solicitud POST a la API utilizando ApiClient
     final response = await apiClient.post('characters', body: body);
 
-    // Verificar el código de respuesta
     if (response.statusCode == 201) {
-      // El personaje se guardó correctamente
       print('Personaje guardado exitosamente');
     } else {
-      // Hubo un error al guardar el personaje
       print('Error al guardar el personaje. Código de respuesta: ${response.statusCode}');
     }
   }
@@ -177,60 +174,36 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey[400]),
-        centerTitle: true,
-        elevation: 0,
-        title: Text(
-          'Character Creation',
-          style: TextStyle(fontSize: 25, color: Colors.grey[400]),
-        ),
-        backgroundColor: Colors.grey.shade800,
-      ),
+      backgroundColor: Color.fromARGB(255, 69, 55, 80), // Morado oscuro
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(80, 10, 80, 30),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Colors.grey[400],
+                  color: Color(0xFFB39DDB), // Lavanda claro
                   borderRadius: BorderRadius.circular(50)),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/perfil.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Divider(height: 30, color: Colors.grey[400]),
                   customTextField("Enter the name", false, _nameController),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   customTextField("Enter the last name", false, _surnameController),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   customTextField("Enter age", true, _ageController),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Race: ",
-                        style:
-                        TextStyle(color: Colors.grey[800], fontSize: 20),
+                        style: TextStyle(color: Colors.grey[800], fontSize: 20),
                       ),
                       DropdownButton<String>(
-                        dropdownColor: Colors.grey[400],
-                        style:
-                        TextStyle(color: Colors.grey[800], fontSize: 20),
+                        dropdownColor: Color(0xFFB39DDB), // Lavanda claro
+                        style: TextStyle(color: Colors.grey[800], fontSize: 20),
                         borderRadius: BorderRadius.circular(30),
                         value: _selectedRace,
                         items: [
@@ -265,35 +238,33 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(80, 10, 80, 30),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Colors.grey[400],
+                  color: Color(0xFFB39DDB), // Lavanda claro
                   borderRadius: BorderRadius.circular(50)),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Stats",
                     style: TextStyle(fontSize: 30, color: Colors.grey[800]),
                   ),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   customTextField("Speed Value", true, _speedController),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   customTextField("Strength Value", true, _strengthController),
-                  Divider(height: 30, color: Colors.grey[400]),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
                   customTextField("Agility Value", true, _agilityController),
-                  Divider(height: 30, color: Colors.grey[400]),
-                  customTextField(
-                      "Intelligence Value", true, _intelligenceController),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
+                  customTextField("Intelligence Value", true, _intelligenceController),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(80, 10, 80, 30),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Colors.grey[400],
+                  color: Color(0xFFB39DDB), // Lavanda claro
                   borderRadius: BorderRadius.circular(50)),
               child: Column(
                 children: [
@@ -301,24 +272,20 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     "Characteristics",
                     style: TextStyle(fontSize: 30, color: Colors.grey[800]),
                   ),
-                  Divider(height: 30, color: Colors.grey[400]),
-                  customCharacteristics(
-                    "Enter the characteristics",
-                        (value) {
-                      setState(() {
-                        _characteristicsController.text = value;
-                      });
-                    },
-                    _characteristicsController,
-                  ),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
+                  customCharacteristics("Enter the characteristics", (value) {
+                    setState(() {
+                      _characteristicsController.text = value;
+                    });
+                  }, _characteristicsController),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(80, 10, 80, 5),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Colors.grey[400],
+                  color: Color(0xFFB39DDB), // Lavanda claro
                   borderRadius: BorderRadius.circular(50)),
               child: Column(
                 children: [
@@ -326,42 +293,25 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     "History",
                     style: TextStyle(fontSize: 30, color: Colors.grey[800]),
                   ),
-                  Divider(height: 30, color: Colors.grey[400]),
-                  customHistori(
-                    "Enter the story",
-                    false,
-                        (value) {
-                      setState(() {
-                        _historiaValue = value;
-                      });
-                    },
-                    _historiaController,
-                  ),
+                  Divider(height: 30, color: Color.fromARGB(255, 69, 55, 80)),
+                  customHistori("Enter history", false, (value) {
+                    setState(() {
+                      _historiaController.text = value;
+                    });
+                  }, _historiaController),
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  FloatingActionButton(
-                    backgroundColor: Colors.grey[400]
-                        ?.withOpacity(0.3),
-                    onPressed: saveCharacter,
-                    child: Icon(Icons.save,
-                        color: Colors.deepPurple[100]),
-                  ),
-                  SizedBox(width: 30),
-                  FloatingActionButton(
-                    backgroundColor: Colors.grey[400]
-                        ?.withOpacity(0.3),
-                    onPressed: (){Navigator.popAndPushNamed(context, '/characters_list');},
-                    child: Icon(Icons.cancel,
-                        color: Colors.deepPurple[100]),
-                  ),
-                ],
+            ElevatedButton(
+              onPressed: saveCharacter,
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                backgroundColor: Color.fromARGB(255, 69, 55, 80), // Morado oscuro
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
               ),
+              child: Text('Save Character',style: TextStyle(color: Color(0xFFB39DDB),fontSize: 30)),
             ),
           ],
         ),
