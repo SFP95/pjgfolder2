@@ -12,7 +12,7 @@ import 'package:pjgfolder2/src/views/newPhoto.dart';
 import 'package:pjgfolder2/src/views/profile_user_log.dart';
 import 'package:pjgfolder2/src/views/register_page.dart';
 import 'package:pjgfolder2/src/views/splash_view.dart';
-import 'package:pjgfolder2/src/views/_LoadingLogoState.dart';
+import 'package:pjgfolder2/src/views/old/_LoadingLogoState.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
