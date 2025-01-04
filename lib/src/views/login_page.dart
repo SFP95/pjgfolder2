@@ -22,61 +22,89 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 69, 55, 80),
+      backgroundColor: Color(0xFFB39DDB),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 69, 55, 80),
+        backgroundColor: Color(0xFFB39DDB),
         iconTheme: IconThemeData(
           color: Color.fromARGB(255, 163, 147, 191),
           size: 30,
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded), // Icono a mostrar
-          onPressed: () {
-            Navigator.popAndPushNamed(context, '/home');
-          },
-        ),
+
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
+            Icon(
+              Icons.account_circle,
+              size: 200,
+              color:Color.fromARGB(255, 69, 55, 80)
+            ),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.fromLTRB(300, 30, 300, 50),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 163, 147, 191),
-                  borderRadius:BorderRadius.circular(20)
+                 // color: Color.fromARGB(255, 69, 55, 80),
+                  borderRadius:BorderRadius.circular(20),
+                  gradient: LinearGradient(colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)])
               ),
-              child: Column(
-                children: [
-                  TextFormField(
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromARGB(255, 12, 9, 16),
+              child: Container(
+                margin: EdgeInsets.fromLTRB(80, 10, 80, 30),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Color(0xFFB39DDB),
+                      ),
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: Color(0xFFB39DDB),
+                            )
+                          ),
+                          labelText: 'Email',
+                          labelStyle: TextStyle(
+                            fontSize: 30,
+                            color: Color(0xFFB39DDB),
+                          )
+                      ),
                     ),
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        labelText: 'Email'),
-                  ),
-                  TextFormField(
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromARGB(255, 12, 9, 16),
+                    TextFormField(
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Color(0xFFB39DDB),
+                      ),
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: Color(0xFFB39DDB),
+                              )
+                          ),
+                          labelText: 'Password',
+                          labelStyle: TextStyle(
+                            fontSize: 30,
+                            color: Color(0xFFB39DDB),
+                          )),
+                      obscureText: true,
                     ),
-                    controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Password'),
-                    obscureText: true,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 70.0,
               children: [
                 ElevatedButton(
                   style:  ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 163, 147, 191)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 69, 55, 80)),
                    ),
                   onPressed: () async {
                     print("LOGIN LLAMADO");
@@ -101,20 +129,20 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: Text('Log in',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 12, 9, 16),
-                        fontSize: 30)),
+                        color: Color(0xFFB39DDB),
+                        fontSize: 28)),
                 ),
                 ElevatedButton(
                   style:  ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 163, 147, 191)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 69, 55, 80)),
                   ),
                   onPressed: () {
                     Navigator.popAndPushNamed(context, '/register');
                   },
                   child: Text('Register',
                       style: TextStyle(
-                          color: Color.fromARGB(255, 12, 9, 16),
-                          fontSize: 30)),
+                          color: Color(0xFFB39DDB),
+                          fontSize: 28)),
                 ),
               ],
             ),
