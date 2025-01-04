@@ -36,41 +36,57 @@ class _HomePageState extends State<HomePage> {
               labelType: NavigationRailLabelType.all,
               destinations: [
                 NavigationRailDestination(
-                  icon: Icon(Icons.casino_rounded),
+                  icon: Icon(Icons.casino_rounded, color: Color(0xFF2E1A39)),  // Color suave para íconos no seleccionados
                   selectedIcon: Icon(Icons.casino_rounded, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Dice Rolls'),
+                  label: Text('Dice Rolls', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.auto_awesome),
+                  icon: Icon(Icons.auto_awesome, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.auto_awesome, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Spells'),
+                  label: Text('Spells', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.bolt),
+                  icon: Icon(Icons.bolt, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.bolt, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Combat'),
+                  label: Text('Combat', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.pets),
+                  icon: Icon(Icons.pets, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.pets, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Bestiary'),
+                  label: Text('Bestiary', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.history_edu),
+                  icon: Icon(Icons.history_edu, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.history_edu, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Campaign'),
+                  label: Text('Campaign', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.account_circle_outlined),
+                  icon: Icon(Icons.account_circle_outlined, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.account_circle_outlined, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text('Characters'),
+                  label: Text('Characters', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.login),
+                  icon: Icon(Icons.login, color: Color(0xFF2E1A39)),
                   selectedIcon: Icon(Icons.login, color: Color.fromARGB(255, 69, 55, 80)),
-                  label: Text(' Login | out'),
+                  label: Text('Login | out', style: TextStyle(color: Color(0xFF2E1A39))),
                 ),
               ],
+              elevation: 8,  // Agregar sombra
+              minWidth: 80,  // Ajuste de ancho para un diseño más compacto
+              selectedLabelTextStyle: TextStyle(
+                color: Color.fromARGB(255, 69, 55, 80),  // Color de las etiquetas seleccionadas
+              ),
+              unselectedLabelTextStyle: TextStyle(
+                color: Color(0xFF2E1A39),  // Color de las etiquetas no seleccionadas
+              ),
+              leading: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Color.fromARGB(165, 69, 55, 80),
+                  child: Icon(Icons.person, color: Color(0xFF2E1A39)),  // Avatar con color contrastante
+                ),
+              ),
             ),
           ),
           Expanded(
