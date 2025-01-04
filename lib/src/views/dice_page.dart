@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class DicePage extends StatefulWidget {
@@ -7,16 +6,37 @@ class DicePage extends StatefulWidget {
   _DicePageState createState() => _DicePageState();
 }
 
-class _DicePageState extends State<DicePage> {
+class _DicePageState extends State<DicePage> with SingleTickerProviderStateMixin {
   int _selectedDice = 20;
   int _diceCount = 1;
   int _result = 0;
+  late AnimationController _animationController;
 
-  void _rollDice() {
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _rollDice() async {
+    _animationController.reset();
+    _animationController.forward();
+
+    await Future.delayed(Duration(milliseconds: 500));
     int sum = 0;
     for (int i = 0; i < _diceCount; i++) {
       sum += Random().nextInt(_selectedDice) + 1;
     }
+
     setState(() {
       _result = sum;
     });
@@ -24,162 +44,136 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Scaffold(
-        backgroundColor: Color(0xFFB39DDB),
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          //title: Text('Dice Rolls',style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 69, 55, 80))),
-          backgroundColor: Color(0xFFB39DDB),
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(250, 1, 250, 1),
-                  padding: EdgeInsets.all(40),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Colors.grey[800]
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Num of die faces:",style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
-                    Divider(height: 30),
-                    DropdownButton<int>(
-                      dropdownColor: Color.fromARGB(255, 69, 55, 80),
-                      style: TextStyle(color: Color(0xFFB39DDB), fontSize: 30),
-                      borderRadius: BorderRadius.circular(30),
-                      value: _selectedDice,
-                      items: [
-                        4, 6, 8, 10, 12, 20
-                      ].map<DropdownMenuItem<int>>(
-                            (int value) {
-                          List<int> diceValues;
-                          switch (value) {
-                            case 4:
-                              diceValues = List.generate(4, (index) => index + 1);
-                              break;
-                            case 6:
-                              diceValues = List.generate(6, (index) => index + 1);
-                              break;
-                            case 8:
-                              diceValues = List.generate(8, (index) => index + 1);
-                              break;
-                            case 10:
-                              diceValues = List.generate(10, (index) => (index + 1) * 10);
-                              break;
-                            case 12:
-                              diceValues = List.generate(12, (index) => index + 1);
-                              break;
-                            case 20:
-                              diceValues = List.generate(20, (index) => index + 1);
-                              break;
-                            default:
-                              diceValues = List.generate(4, (index) => index + 1);
-                          }
-
-                          return DropdownMenuItem<int>(
-                            value: value,
-                            child: Text('D$value'),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (int? newValue) {
-                        setState(() {
-                          _selectedDice = newValue ?? 4;
-                        });
-                      },
-                    ),
-
-                  ],
-                )
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.fromLTRB(250, 1, 250, 1),
-                padding: EdgeInsets.all(40),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Color.fromARGB(255, 69, 55, 80)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Num of dice:",style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
-                    Divider(height: 30,color: Color.fromARGB(255, 69, 55, 80)),
-                    DropdownButton<int>(
-                      dropdownColor: Color.fromARGB(255, 69, 55, 80),
-                      style: TextStyle(fontSize: 30, color: Color(0xFFB39DDB)),
-                      borderRadius: BorderRadius.circular(10),
-                      value: _diceCount,
-                      items: List<DropdownMenuItem<int>>.generate(11, (int index) {
-                        return DropdownMenuItem<int>(
-                          value: index,
-                          child: Text(index.toString()),
-                        );
-                      }),
-                      onChanged: (int? newValue) {
-                        setState(() {
-                          _diceCount = newValue ?? 0;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.fromLTRB(300, 1, 300, 1),
-                padding: EdgeInsets.all(40),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Color.fromARGB(255, 69, 55, 80)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFB39DDB)),
-                        shape:  MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(side: BorderSide(color: Color.fromARGB(255, 41, 33, 47),width: 4,strokeAlign: 1.0),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      onPressed: _rollDice,
-                      child: Text('Roll ',style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 41, 33, 47))),
-                    ),
-                    Text('Result:    $_result',style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
-                  ],
-                ),
-              ),
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFB39DDB), // Lavanda claro
+              Color(0xFF2E1A39), // Morado oscuro
             ],
           ),
         ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Cabecera con ícono
+                Column(
+                  children: [
+                    Icon(Icons.casino, size: 100, color: Color.fromARGB(255, 41, 33, 47)),
+                    SizedBox(height: 10),
+                    Text(
+                      'Roll Your Dice!',
+                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Color(0xFF2E1A39)),
+                    ),
+                  ],
+                ),
+                // Configuración de dados
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 300.0), // Márgenes exteriores a la izquierda y derecha
+                  child: Card(
+                    color: Color(0xFFB29EB6), // Fondo claro para contraste
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    elevation: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 150), // Más compacto
+                      child: Column(
+                        children: [
+                          _buildDropdownRow(
+                            'Number of die faces:',
+                            _selectedDice,
+                            [4, 6, 8, 10, 12, 20],
+                                (int? newValue) {
+                              setState(() => _selectedDice = newValue ?? 4);
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          _buildDropdownRow(
+                            'Number of dice:',
+                            _diceCount,
+                            List.generate(10, (i) => i + 1),
+                                (int? newValue) {
+                              setState(() => _diceCount = newValue ?? 1);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // Botón de lanzamiento y resultado
+                Card(
+                  color: Color(0xFFB29EB6), // Fondo claro para contraste
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  elevation: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: _rollDice,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF2E1A39), // Fondo oscuro
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                          ),
+                          child: Text('Roll', style: TextStyle(fontSize: 20, color: Color(0xFFCFBBD3))),
+                        ),
+                        SizedBox(height: 20),
+                        AnimatedBuilder(
+                          animation: _animationController,
+                          builder: (context, child) {
+                            double scale = 1 + _animationController.value * 0.2;
+                            return Transform.scale(
+                              scale: scale,
+                              child: Text(
+                                'Result: $_result',
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF2E1A39), // Texto oscuro
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildDropdownRow(String label, int value, List<int> items, ValueChanged<int?> onChanged) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: TextStyle(fontSize: 30, color: Color(0xFF2E1A39))),
+        DropdownButton<int>(
+          dropdownColor: Color(0xFFB29EB6),
+          value: value,
+          items: items
+              .map((item) => DropdownMenuItem<int>(
+            value: item,
+            child: Text(
+              'D$item',
+              style: TextStyle(fontSize: 30, color: Color(0xFF2E1A39)),
+            ),
+          ))
+              .toList(),
+          onChanged: onChanged,
+        ),
+      ],
     );
   }
 }
