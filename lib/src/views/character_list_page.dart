@@ -64,25 +64,13 @@ class _CharacterListPageState extends State<CharacterListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Color(0xFFB39DDB),
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.grey[400],
+          color:Color(0xFFB39DDB),
           size: 30,
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, '/home');
-          },
-        ),
-        centerTitle: true,
-        elevation: 0,
-        title: Text(
-          'List of Characters',
-          style: TextStyle(fontSize: 30, color: Colors.grey[400]),
-        ),
-        backgroundColor: Colors.grey.shade800,
+        backgroundColor: Color(0xFFB39DDB),
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(30),
@@ -96,7 +84,7 @@ class _CharacterListPageState extends State<CharacterListPage> {
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: Colors.grey[400],
+                color: Color.fromARGB(255, 69, 55, 80),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ListTile(
@@ -104,7 +92,7 @@ class _CharacterListPageState extends State<CharacterListPage> {
                   randomCharacter.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.grey[800],
+                    color: Color(0xFFB39DDB),
                     fontSize: 30,
                   ),
                 ),
@@ -112,7 +100,7 @@ class _CharacterListPageState extends State<CharacterListPage> {
                   randomCharacter.race,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.grey[600],
+                    color: Color(0xFFB39DDB),
                     fontSize: 20,
                   ),
                 ),

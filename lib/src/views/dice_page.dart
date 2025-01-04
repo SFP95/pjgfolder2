@@ -8,7 +8,7 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
-  int _selectedDice = 4;
+  int _selectedDice = 20;
   int _diceCount = 1;
   int _result = 0;
 
@@ -40,13 +40,13 @@ class _DicePageState extends State<DicePage> {
             children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.all(60),
-                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.fromLTRB(150, 1, 150, 1),
+                  padding: EdgeInsets.all(40),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Colors.grey[800]
@@ -55,11 +55,11 @@ class _DicePageState extends State<DicePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Num of die faces:",style: TextStyle(fontSize: 25,color: Colors.grey[400])),
-                    Divider(height: 20),
+                    Text("Num of die faces:",style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
+                    Divider(height: 30),
                     DropdownButton<int>(
-                      dropdownColor: Colors.grey[800],
-                      style: TextStyle(color: Colors.grey[400], fontSize: 20),
+                      dropdownColor: Color.fromARGB(255, 69, 55, 80),
+                      style: TextStyle(color: Color(0xFFB39DDB), fontSize: 30),
                       borderRadius: BorderRadius.circular(30),
                       value: _selectedDice,
                       items: [
@@ -108,25 +108,25 @@ class _DicePageState extends State<DicePage> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(60),
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.fromLTRB(150, 1, 150, 1),
+                padding: EdgeInsets.all(40),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Colors.grey[800]),
+                    color: Color.fromARGB(255, 69, 55, 80)),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Num of dice:",style: TextStyle(fontSize: 25,color: Colors.grey[400])),
-                    Divider(height: 25,color: Colors.grey[800]),
+                    Text("Num of dice:",style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
+                    Divider(height: 30,color: Color.fromARGB(255, 69, 55, 80)),
                     DropdownButton<int>(
-                      dropdownColor: Colors.grey[800],
-                      style: TextStyle(fontSize: 25, color: Colors.grey[400]),
+                      dropdownColor: Color.fromARGB(255, 69, 55, 80),
+                      style: TextStyle(fontSize: 30, color: Color(0xFFB39DDB)),
                       borderRadius: BorderRadius.circular(10),
                       value: _diceCount,
                       items: List<DropdownMenuItem<int>>.generate(11, (int index) {
@@ -146,33 +146,33 @@ class _DicePageState extends State<DicePage> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(60),
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.fromLTRB(300, 1, 300, 1),
+                padding: EdgeInsets.all(40),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 41, 33, 47)], // Gradiente de lavanda a morado
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Colors.grey[800]),
+                    color: Color.fromARGB(255, 69, 55, 80)),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.grey.shade900),
+                        backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFB39DDB)),
                         shape:  MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                          RoundedRectangleBorder(side: BorderSide(color: Color.fromARGB(255, 41, 33, 47),width: 4,strokeAlign: 1.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
                       onPressed: _rollDice,
-                      child: Text('Roll ',style: TextStyle(fontSize: 25,color: Colors.grey[400])),
+                      child: Text('Roll ',style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 41, 33, 47))),
                     ),
-                    Text('Result:    $_result',style: TextStyle(fontSize: 25,color: Colors.grey[400])),
+                    Text('Result:    $_result',style: TextStyle(fontSize: 30,color: Color(0xFFB39DDB))),
                   ],
                 ),
               ),
