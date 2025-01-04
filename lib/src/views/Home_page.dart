@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       body: Row(
         children: [
           Material(
-            elevation: 10, // Sombra al NavigationRail
+            elevation: 0, // Sombra al NavigationRail
             child: NavigationRail(
               backgroundColor: Color(0xFFB39DDB),
               selectedIndex: selectedIndex,

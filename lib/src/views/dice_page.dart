@@ -26,22 +26,12 @@ class _DicePageState extends State<DicePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Scaffold(
-        backgroundColor: Colors.grey[400],
+        backgroundColor: Color(0xFFB39DDB),
         appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.grey[800],
-            size: 30,
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_rounded), // Icono a mostrar
-            onPressed: () {
-              Navigator.popAndPushNamed(context, '/home');
-            },
-          ),
           centerTitle: true,
           elevation: 0,
-          title: Text('Dices',style: TextStyle(fontSize: 30,color: Colors.grey[800])),
-          backgroundColor: Colors.grey.shade400,
+          //title: Text('Dice Rolls',style: TextStyle(fontSize: 30,color: Color.fromARGB(255, 69, 55, 80))),
+          backgroundColor: Color(0xFFB39DDB),
         ),
         body: SafeArea(
           child: Column(
@@ -50,9 +40,14 @@ class _DicePageState extends State<DicePage> {
             children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.all(20),
+                  margin: EdgeInsets.all(60),
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Colors.grey[800]
                 ),
@@ -113,9 +108,14 @@ class _DicePageState extends State<DicePage> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(60),
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Colors.grey[800]),
                 child: Row(
@@ -146,9 +146,14 @@ class _DicePageState extends State<DicePage> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(60),
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color.fromARGB(255, 69, 55, 80), Color.fromARGB(255, 69, 55, 80)], // Gradiente de lavanda a morado
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Colors.grey[800]),
                 child: Row(
