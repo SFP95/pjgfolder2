@@ -77,22 +77,6 @@ class _CharacterListPageState extends State<CharacterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFB39DDB),  // Fondo lavanda claro
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Color(0xFF2E1A39), // Morado oscuro
-          size: 30,
-        ),
-        backgroundColor: Color(0xFFB39DDB),
-        elevation: 0, // Eliminar sombra del AppBar para integración limpia
-        title: Text(
-          'Character List',
-          style: TextStyle(
-            color: Color(0xFF2E1A39), // Morado oscuro para el título
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
       body: characters.isEmpty
           ? Center(
         child: CircularProgressIndicator(),
