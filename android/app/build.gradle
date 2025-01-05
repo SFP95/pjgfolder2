@@ -5,6 +5,9 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+apply plugin: 'com.android.application'
+apply plugin: 'dev.flutter.flutter-gradle-plugin'  // Este es el plugin que necesitas
+
 android {
     namespace = "com.example.pjgfolder2"
     compileSdk = flutter.compileSdkVersion
@@ -37,6 +40,13 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    classpath 'com.android.tools.build:gradle:8.12'
+    classpath 'dev.flutter:flutter-gradle-plugin:3.5.0'  // Asegúrate de que este plugin esté incluido
+
 }
 
 flutter {

@@ -8,6 +8,8 @@ buildscript {
     dependencies {
         // Dependencia de Gradle Plugin para Android
         classpath 'com.android.tools.build:gradle:8.0.0'  // Asegúrate de que la versión de Gradle Plugin sea compatible con tu configuración
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"  // Asegúrate de que se especifique la versión del plugin Kotlin
+
     }
 }
 
@@ -19,16 +21,14 @@ allprojects {
     }
 }
 
-// Configuración para limpiar el proyecto (comando gradle clean)
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
-}
 
 // app/build.gradle
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'  // Asegúrate de agregar este plugin
 
 android {
+    namespace 'com.example.pjgfolder2'  // Agrega tu propio namespace aquí
     compileSdkVersion 33  // Versión del SDK de compilación
 
     defaultConfig {
@@ -55,5 +55,5 @@ android {
 dependencies {
     // Dependencias necesarias para tu proyecto Android
     implementation 'androidx.appcompat:appcompat:1.4.0'  // Ejemplo de dependencia de AppCompat
-    // Aquí puedes agregar otras dependencias necesarias para tu proyecto
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"  // Especifica una versión de Kotlin aquí
 }

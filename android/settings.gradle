@@ -1,1 +1,3 @@
 include ':app'
+
+setProjectDir(':app', file('android/app'))
