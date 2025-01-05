@@ -1,34 +1,59 @@
-allprojects {
+// build.gradle (Raíz del Proyecto)
+
+buildscript {
     repositories {
-        google()
-        mavenCentral()
+        google()  // Repositorio de Google
+        mavenCentral()  // Repositorio central de Maven
+    }
+    dependencies {
+        // Dependencia de Gradle Plugin para Android
+        classpath 'com.android.tools.build:gradle:8.12'  // Asegúrate de que la versión de Gradle Plugin sea compatible con tu configuración
     }
 }
 
-rootProject.buildDir = "../build"
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+// Repositorios globales para todos los módulos del proyecto
+allprojects {
+    repositories {
+        google()  // Repositorio de Google
+        mavenCentral()  // Repositorio central de Maven
+    }
 }
 
+// Configuración para limpiar el proyecto (comando gradle clean)
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
+// app/build.gradle
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33  // Versión del SDK de compilación
+
+    defaultConfig {
+        applicationId "com.example.myapp"  // Reemplaza con el ID de tu aplicación
+        minSdkVersion 21  // Versión mínima de Android
+        targetSdkVersion 33  // Versión de destino del SDK
+        versionCode 1  // Código de la versión
+        versionName "1.0"  // Nombre de la versión
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.12'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17  // Compatibilidad con Java 17
+        targetCompatibility JavaVersion.VERSION_17  // Compatibilidad con Java 17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false  // Deshabilita la minificación de código en modo release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'  // Archivos de configuración de Proguard
+        }
     }
 }
-android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
+
+dependencies {
+    // Dependencias necesarias para tu proyecto Android
+    implementation 'androidx.appcompat:appcompat:1.4.0'  // Ejemplo de dependencia de AppCompat
+    // Aquí puedes agregar otras dependencias necesarias para tu proyecto
 }
